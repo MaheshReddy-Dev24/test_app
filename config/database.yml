@@ -1,0 +1,27 @@
+default: &default
+  adapter: mysql2
+  encoding: utf8mb4
+  collation: utf8mb4_unicode_ci
+  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+  timeout: 5000
+  username: root # As requested by the user
+  password: tiger
+  host: 127.0.0.1 # Or 'localhost'
+
+development:
+  <<: *default
+  database: test_app_development
+
+# Warning: The database defined as "test" will be erased and
+# re-generated from your development database when you run "rails test".
+# Do not set this db to the same as development or production.
+test:
+  <<: *default
+  database: test_app_test
+
+production:
+  <<: *default
+  database: test_app_production
+  username: <%= ENV["DATABASE_USERNAME"] %> # Use environment variable for production username
+  password: <%= ENV["DATABASE_PASSWORD"] %> # Use environment variable for production password
+  host: <%= ENV["DATABASE_HOST"] %> # Use environment variable for production host
